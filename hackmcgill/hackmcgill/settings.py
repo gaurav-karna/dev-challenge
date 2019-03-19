@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import djongo
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = 'r_3932@ds*^9#g8fb0c2m18q22*($b+@&5@zczy5%u1$5h^sn*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'hackmcgillApp',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'hackmcgill.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'Templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +77,8 @@ WSGI_APPLICATION = 'hackmcgill.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'NAME': 'hackmcgill-prod',
     }
 }
 
@@ -105,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 
@@ -118,3 +120,47 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        # file based log view of production server (triggered when DEBUG = False)
+        'production': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'Logging/production.log'),
+        },
+        # outputs development log data to console
+        'development': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+
+        # if you need to view logging in development in a file-based manner, comment the 'development' above, and uncomment below.
+
+        # 'development': {
+        #     'level': 'DEBUG',
+        #     'filters': ['require_debug_true'],
+        #     'class': 'logging.FileHandler',
+        #     'filename': os.path.join(BASE_DIR, 'Logging/development.log'),
+        # },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['production', 'development'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
