@@ -25,10 +25,6 @@ class HackAdmin (models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='admin_profile')
 
-    First_name = models.CharField(max_length=32)
-
-    Last_name = models.CharField(max_length=32)
-
     Role = models.CharField(max_length=32, choices=roles)
 
 

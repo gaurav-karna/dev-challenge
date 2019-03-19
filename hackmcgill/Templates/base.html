@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    {% block title %}
+        <title>DevChallenge | Home</title>
+    {% endblock %}
 </head>
 <body>
-<h1>Test</h1>
+    {% block content %}
+     <h1>Test</h1>
+    {% endblock %}
 </body>
 </html>
