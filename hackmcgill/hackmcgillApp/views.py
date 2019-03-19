@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 
-#from .models import
+from django.http import HttpResponse
+
+#from .models import Person, HackAdmin, User
 
 #from .forms import EmailForm
 
@@ -11,7 +13,7 @@ from django.template.loader import render_to_string
 # Create your views here.
 
 def index (request):
-    return render(request, 'base.html', {})
+    return render (request, "base.html", {})
 
 def success (request):
     return render (request, 'base.html', {})
