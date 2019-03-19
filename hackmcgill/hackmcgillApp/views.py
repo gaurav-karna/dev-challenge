@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
-#from .models import Person, HackAdmin, User
+from .models import Person, HackAdmin, User
 
 from .forms import HackAdminForm, UserForm, PersonForm
 
@@ -22,18 +22,29 @@ def success (request):
         person = PersonForm(request.POST)
         if person.is_valid():
             new_person = person.save()
+            # triggers generic success page
+            return render (request, 'success.html', {})
+        else:
+            context = {
+                'error_message':'Invalid form submission, please check the email provided!'
+            }
+            return render (request, 'base.html', context)
     else:
         context = {
             'person_form':PersonForm(),
         }
-        return render (request, 'success.html', {})
+        return render (request, 'base.html', {})
 
 @login_required
 @staff_member_required
 def admin_home (request):
     # view will show all registered admins and users on different tabs
+    admins = HackAdmin.objects.order_by('user.first_name')
+    persons = Person.objects.order_by('First_name')
     context = {
-        'user':request.user
+        'user':request.user,
+        'admins':admins,
+        'persons':persons,
     }
     return render (request, 'admin_home.html', context)
 
@@ -50,11 +61,19 @@ def create_admin (request):
             new_admin_profile.user = new_admin
             new_admin.save()
             new_admin_profile.save()
-        context = {
-            'user': request.user,
-            'success_message':'New Admin successfully created'
-        }
-        return render (request, 'admin_home.html', context)
+            admins = HackAdmin.objects.order_by('user.first_name')
+            persons = Person.objects.order_by('First_name')
+            context = {
+                'user': request.user,
+                'success_message': 'New Admin successfully created',
+                'admins': admins,
+                'persons': persons,
+            }
+            return render(request, 'admin_home.html', context)
+        else:
+            context = {
+                'error_message': 'Error in form submission, please check email provided!'
+            }
     else:
         user_form = UserForm()
         hackAdmin_form = HackAdminForm()

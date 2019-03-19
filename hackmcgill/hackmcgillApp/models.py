@@ -1,8 +1,7 @@
-from django.db import models
-
+# from django.db import models
+from djongo import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
-# import djongo
 
 # sign in will be via username and password - validation done by Django validators.
 class User (AbstractUser):
@@ -22,7 +21,7 @@ roles = (
 # view function that has admin creation form will have staff_required flag set beforehand
 # FIRST ADMIN has to be done through createsuperuser command in django
 class HackAdmin (models.Model):
-
+    objects = models.DjongoManager()
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='admin_profile')
 
     Role = models.CharField(max_length=32, choices=roles)
@@ -30,7 +29,7 @@ class HackAdmin (models.Model):
 
 # visitor object - will sign up via public email form on index page.
 class Person (models.Model):
-
+    objects = models.DjongoManager()
     First_name = models.CharField(max_length=32)
 
     Last_name = models.CharField(max_length=32)
