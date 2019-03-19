@@ -14,4 +14,4 @@ def index (request):
     return render(request, 'base.html', {})
 
 def success (request):
-    pass
+    return render (request, 'base.html', {})
