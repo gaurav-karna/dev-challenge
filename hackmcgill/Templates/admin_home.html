@@ -5,5 +5,44 @@
 {% endblock %}
 
 {% block content %}
+    <h1>Hello {{ user.first_name }}</h1>
+    <h1><a href="/portal/logout">Logout</a></h1>
+    <h1><a href="{% url 'create_admin' %}">Create Admin</a></h1>
 
+    {{ success_message }}
+
+    <div id="all_persons">
+        <h3>All Interested Persons</h3>
+        <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+                {% for person in persons %}
+                    <tr>
+                        <td>{{ person.First_name }} {{ person.Last_name }}</td>
+                        <td>{{ person.Email }}</td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+    </div>
+
+    <div id="all_admins">
+        <h3>All HackAdmins</h3>
+        <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                </tr>
+                {% for admin in admins %}
+                    <tr>
+                        <td>{{ admin.user.first_name }} {{ admin.user.last_name }}</td>
+                        <td>{{ admin.Role }}</td>
+                        <td>{{ admin.user.email }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+    </div>
 {% endblock %}

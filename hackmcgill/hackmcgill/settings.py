@@ -73,6 +73,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hackmcgill.wsgi.application'
 
+LOGIN_REDIRECT_URL = 'diverge'
+LOGOUT_REDIRECT_URL = 'logout_screen'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases

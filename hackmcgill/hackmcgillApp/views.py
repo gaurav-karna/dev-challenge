@@ -8,6 +8,8 @@ from .models import Person, HackAdmin, User
 
 from .forms import HackAdminForm, UserForm, PersonForm
 
+import djongo
+
 # Email imports
 from django.core.mail import send_mail, send_mass_mail
 from django.template.loader import render_to_string
@@ -15,7 +17,11 @@ from django.template.loader import render_to_string
 # Create your views here.
 
 def index (request):
-    return render (request, "base.html", {})
+    context = {
+        'person_form': PersonForm(),
+
+    }
+    return render (request, "base.html", context)
 
 def success (request):
     if request.method == 'POST':
@@ -26,21 +32,23 @@ def success (request):
             return render (request, 'success.html', {})
         else:
             context = {
-                'error_message':'Invalid form submission, please check the email provided!'
+                'error_message':'Invalid form submission, please check the email provided!',
+                'person_form': PersonForm(),
+
             }
             return render (request, 'base.html', context)
     else:
         context = {
             'person_form':PersonForm(),
         }
-        return render (request, 'base.html', {})
+        return render (request, 'base.html', context)
 
 @login_required
 @staff_member_required
 def admin_home (request):
     # view will show all registered admins and users on different tabs
-    admins = HackAdmin.objects.order_by('user.first_name')
-    persons = Person.objects.order_by('First_name')
+    admins = HackAdmin.objects.all().order_by('Created_at')
+    persons = Person.objects.all().order_by('First_name')
     context = {
         'user':request.user,
         'admins':admins,
@@ -55,14 +63,17 @@ def create_admin (request):
         user_form = UserForm(request.POST)
         admin_form = HackAdminForm(request.POST)
         if admin_form.is_valid() and user_form.is_valid():
-            new_admin = user_form.save()
+            new_admin = user_form.save(commit=False)
+            new_admin.is_staff = True
+            new_admin.is_superuser = True
+            new_admin.save()
             new_admin_profile = admin_form.save(commit=False)
             new_admin.admin_profile = new_admin_profile
             new_admin_profile.user = new_admin
             new_admin.save()
             new_admin_profile.save()
-            admins = HackAdmin.objects.order_by('user.first_name')
-            persons = Person.objects.order_by('First_name')
+            admins = HackAdmin.objects.all().order_by('Created_at')
+            persons = Person.objects.all().order_by('First_name')
             context = {
                 'user': request.user,
                 'success_message': 'New Admin successfully created',
@@ -82,3 +93,20 @@ def create_admin (request):
             'hackAdmin_form':hackAdmin_form
         }
         return render (request, 'new_admin.html', context)
+
+def diverge (request):
+    current_user = request.user
+    if current_user.is_staff == True:
+        admins = HackAdmin.objects.all().order_by('Created_at')
+        persons = Person.objects.all().order_by('First_name')
+        context = {
+            'user': request.user,
+            'admins': admins,
+            'persons': persons,
+        }
+        return redirect('/portal/login/admin_home', context)
+    else:
+        return HttpResponse(status=403)
+
+def logout_screen (request):
+    return redirect('/')
