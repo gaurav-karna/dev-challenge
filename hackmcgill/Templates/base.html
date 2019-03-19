@@ -5,13 +5,44 @@
     {% block title %}
         <title>DevChallenge | Home</title>
     {% endblock %}
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hind">
+
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href="{% static 'frame.css' %}"/>
+    <div id="navbar">
+        <a href="{% url 'home' %}">
+           <img src="{% static 'favicon.ico' %}" align="left" style="background-color: whitesmoke;">
+        </a>
+
+        <a href="https://github.com/gaurav-karna/dev-challenge">
+         <img src="{% static 'Github-Mark-32px.png' %}" align="right" style="background-color: whitesmoke; padding-top: 7px;">
+        </a>
+    </div>
     {% block content %}
-     <h1>Home Page</h1>
-    <h1><a href="{% url 'login' %}">Login</a></h1>
+    <div id="page-header" align="center" style="padding-bottom: 0px;">
+        <h1>Welcome to HackMcGill</h1>
+        <div id="thin_line" style="padding: 0"></div>
+    </div>
+
     {{ error_message }}
 
+    <div id="person_form" style="background-color: whitesmoke;" align="center">
+        <h3>Keep in touch with us!</h3>
+        <form method="post">
+        {% csrf_token %}
+        {{ person_form.as_p }}
+        <input type="submit" class="std-button" value="Submit">
+        <div id="admin-button" style="padding-top: 10px" align="center">
+             <a href="{% url 'login' %}">
+                <input type="button" class="std-button" value="Admin Login">
+            </a>
+        </div>
+    </form>
+    </div>
     {% endblock %}
 </body>
 </html>

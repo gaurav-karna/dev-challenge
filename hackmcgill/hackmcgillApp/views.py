@@ -17,13 +17,6 @@ from django.template.loader import render_to_string
 # Create your views here.
 
 def index (request):
-    context = {
-        'person_form': PersonForm(),
-
-    }
-    return render (request, "base.html", context)
-
-def success (request):
     if request.method == 'POST':
         person = PersonForm(request.POST)
         if person.is_valid():
@@ -42,6 +35,9 @@ def success (request):
             'person_form':PersonForm(),
         }
         return render (request, 'base.html', context)
+
+def success (request):
+    return render (request, "success.html", {})
 
 @login_required
 @staff_member_required

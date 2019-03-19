@@ -1,0 +1,40 @@
+body {
+    font-family: Hind, Arial, sans-serif;
+    background-color: whitesmoke;
+    overflow: auto;
+}
+
+#thin_line {
+    border-bottom: 1px solid lightpink;
+    width: 75vw;
+}
+
+#navbar {
+    background-color: whitesmoke;
+    height: 48px;
+    width: 100%;
+}
+
+.std-button {
+    background-color: lightpink;
+    color: white;
+    font-family: Raleway, Arial, sans-serif;
+    font-size: 15px;
+    width: 150px;
+    height: 36px;
+    cursor: pointer;
+    border-color: red;
+    border-right-width: 2px;
+    border-left-width: 2px;
+    border-bottom-width: 2px;
+    border-top-width: 2px;
+    border-radius: 12px;
+}
+
+.std-button:hover{
+    background-color: red;
+}
+
+#login {
+    padding-top: 100px;
+}

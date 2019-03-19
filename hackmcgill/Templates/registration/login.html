@@ -5,13 +5,17 @@
 {% endblock %}
 
 {% block content %}
-    <div id="portal" align="center">
-    <h2>Login</h2>
-    <h5><b>Note that your username is your McGill Email</b></h5>
+    <div id="backHome" class="std-button">
+        <a href="{% url 'home' %}"><input type="button" class="std-button" value="Back to Home"/></a>
+    </div>
+    <div id="login" align="center">
+    <h2>HackMcGill Admin Login</h2>
+        <div id="thin_line"></div>
+    <h5><b>Note that your username is your email.</b></h5>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Login</button>
+        <button type="submit" class="std-button">Login</button>
     </form>
 </div>
 {% endblock %}
