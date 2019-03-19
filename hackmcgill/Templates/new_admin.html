@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block content %}
+<div id="create-new-admin" align="center" style="padding-top: 10vw;">
     <h2>Create New Administrator</h2>
+    <div id="thin_line"></div>
     <form method="post">
         {% csrf_token %}
         {{ user_form.as_p }}
         {{ hackAdmin_form.as_p }}
-        <button type="submit">Create</button>
+         <button type="submit" class="std-button">Create</button>
     </form>
+</div>
+
 {% endblock %}

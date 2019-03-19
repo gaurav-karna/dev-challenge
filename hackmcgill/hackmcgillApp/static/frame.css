@@ -38,3 +38,15 @@ body {
 #login {
     padding-top: 100px;
 }
+
+#all_persons table {
+    border: 1px solid lightpink;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#all_admins table {
+    border: 1px solid lightpink;
+    width: 100%;
+    /*border-collapse: collapse;*/
+}

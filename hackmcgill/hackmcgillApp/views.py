@@ -72,7 +72,7 @@ def create_admin (request):
             persons = Person.objects.all().order_by('First_name')
             context = {
                 'user': request.user,
-                'success_message': 'New Admin successfully created',
+                'success_message': 'New Admin successfully created!',
                 'admins': admins,
                 'persons': persons,
             }
