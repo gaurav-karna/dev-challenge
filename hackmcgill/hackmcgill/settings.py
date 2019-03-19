@@ -53,6 +53,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'hackmcgill.urls'
 
+AUTH_USER_MODEL = 'hackmcgillApp.User'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -120,47 +122,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
-        },
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-    },
-    'handlers': {
-        # file based log view of production server (triggered when DEBUG = False)
-        'production': {
-            'level': 'DEBUG',
-            'filters': ['require_debug_false'],
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'Logging/production.log'),
-        },
-        # outputs development log data to console
-        'development': {
-            'level': 'INFO',
-            'filters': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
-        },
-
-        # if you need to view logging in development in a file-based manner, comment the 'development' above, and uncomment below.
-
-        # 'development': {
-        #     'level': 'DEBUG',
-        #     'filters': ['require_debug_true'],
-        #     'class': 'logging.FileHandler',
-        #     'filename': os.path.join(BASE_DIR, 'Logging/development.log'),
-        # },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['production', 'development'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
