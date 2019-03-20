@@ -1,5 +1,7 @@
 # HackMcGill Dev Team Coding Challenge
 
+## See the Live-Site Here --> http://104.248.117.23/
+
 Thank you for your interest in joining the Development team on HackMcGill!
 
 As part of the application process, we've included this coding challenge that aligns with the work that will be done throughout the year on Dev team. While the challenge is optional, we'd love to see what you can do so give it a try and don't be afraid to show off!
