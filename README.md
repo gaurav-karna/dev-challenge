@@ -1,35 +1,41 @@
 # HackMcGill Dev Team Coding Challenge
 
-## See the Live-Site Here --> http://104.248.117.23/
+## Introduction
 
-Thank you for your interest in joining the Development team on HackMcGill!
+First, feel free to see the Live-Site Here --> http://104.248.117.23/
 
-As part of the application process, we've included this coding challenge that aligns with the work that will be done throughout the year on Dev team. While the challenge is optional, we'd love to see what you can do so give it a try and don't be afraid to show off!
+This web application was built to complete the development team challenge (check forked repository), for the HackMcGill Recruitment Process 2019.
 
-The deadline to submit your challenge is Wed March 20 at 1:00 PM. Best of luck!
+The stack is:
+- Python 3.7
+- Django 2.1.4
+- MongoDB 4.0 Community
+- HTML/CSS
+- Python Packages (Djongo)
 
-## Instructions
+The application was deployed to a droplet on DigitalOcean, on a VPS running Ubuntu 18.04
 
-You have been asked to build a webpage with an email submit form, similar to what's live on [hackmcgill.com](https://hackmcgill.com). 
+## Run Locally
 
-There are several ways to approach this challenge, you can try to tackle one you're best at or take a shot at all of them:
-1. Design a mockup
-2. Build a web app or static webpage
-3. Write a script that stores the form data
+Ensure you have the above dependencies installed.
 
-Keep in mind that our Dev team uses MERN stack, Typescript, and SASS though you're welcome to code in what you're comfortable with. We also really value documentation.
+Then clone the repository --> ``` git clone https://github.com/gaurav-karna/dev-challenge ```
 
-## To submit
+Navigate into the repository: ``` cd dev-challenge/```
 
-1. Fork this repo and commit your code
-2. If you'd like, include a statement explaining what you did and how you did it
+Ensure you have MongoDB running in the background, then make the required migrations: ```python3 manage.py makemigrations```, and then follow with ```python3 manage.py migrate```
 
-## Resources
+Start the development server with ```python3 manage.py runserver```, and navigate to ```localhost:8000``` in your browser.
 
-Check out our other repos:
-- [HackerAPI](https://github.com/hackmcgill/hackerAPI)
-- [HackerAPI Frontend](https://github.com/hackmcgill/hackerAPI-frontend)
-- [McHacks 6 Site](https://github.com/hackmcgill/mchacks6)
-- [HackMcGill Site](https://github.com/hackmcgill/hackmcgill)
+## Challenges
 
-P.S. We like the font [Hind](https://fonts.google.com/specimen/Hind) 😉
+MongoDB is a new technology that I had to learn how to work with. Though I have had minimal NoSQL experience with Google Firebase, it was still a learning curve - albeit, still much easier to work with as opposed to PostgreSQL.
+
+Deploying to DigitalOcean was done through their guide --> https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04#create-and-configure-a-new-django-project
+
+I had some troubles configuring nginx properly, although it should be working properly now. I added a CNAME for hackmcgill.gkarna.com to point to the same resource of the IP address above - although it will take some time to propagate.
+
+
+## Questions / Improvements
+
+Feel free to open an issue, or contact me at gaurav.karna@mail.mcgill.ca
