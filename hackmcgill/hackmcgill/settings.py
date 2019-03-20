@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'r_3932@ds*^9#g8fb0c2m18q22*($b+@&5@zczy5%u1$5h^sn*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost',]
+ALLOWED_HOSTS = ['gkarna.com', '104.248.117.23']
 
 
 # Application definition
