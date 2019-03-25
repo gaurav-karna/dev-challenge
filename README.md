@@ -2,7 +2,7 @@
 
 ## Introduction
 
-First, feel free to see the Live-Site Here --> http://104.248.117.23/
+### The live-site has been taken down as the challenge has been completed.
 
 This web application was built to complete the development team challenge (check forked repository), for the HackMcGill Recruitment Process 2019.
 
